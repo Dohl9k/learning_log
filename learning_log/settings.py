@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import django_heroku
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'qlrvfq_g5!v-t=9nkguulz@-t&7ojq7kmsx8vdvxit#72u$jmu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'learning_log.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [django_heroku.os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +128,7 @@ LOGIN_URL = '/users/login/'
 # Настройки Heroku
 
 django_heroku.settings(locals())
-if django_heroku.os.environ.get('DEBUG') == 'TRUE':
+if os.environ.get('DEBUG') == 'TRUE':
     DEBUG = True
-elif django_heroku.os.environ.get('DEBUG') == 'FALSE':
+elif os.environ.get('DEBUG') == 'FALSE':
     DEBUG = False
